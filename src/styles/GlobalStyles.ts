@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle`
     --blue: #5429cc;
     --blue-light: #6933ff;
     --text-title: #363f5f;
-    --text-boby: #969cb3;
+    --text-body: #969cb3;
     --shape: #ffffff;
   }
 `;
