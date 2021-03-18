@@ -1,10 +1,11 @@
-import { GlobalStyles } from "./styles/GlobalStyles";
+import { Header } from './components/Header';
+import { GlobalStyles } from './styles/GlobalStyles';
 
-export const App= () => {
+export const App = () => {
   return (
-    <div className="App">
-      <h1>World hold </h1>
-      <GlobalStyles/>
-    </div>
+    <>
+      <Header />
+      <GlobalStyles />
+    </>
   );
 };
