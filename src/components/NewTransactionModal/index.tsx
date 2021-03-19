@@ -5,7 +5,6 @@ import closeImage from '../../assets/close.svg';
 import incomeImage from '../../assets/income.svg';
 import outcomeImage from '../../assets/outcome.svg';
 import { useTrasactions } from '../../hooks';
-import { api } from '../../services/api';
 
 import * as S from './styles';
 
@@ -25,15 +24,22 @@ export const NewTransactionModal = ({
   const [amount, setAmount] = useState(0);
   const [type, setType] = useState('deposit');
 
-  const handleCreateNewTransaction = (event: FormEvent) => {
+  const handleCreateNewTransaction = async (event: FormEvent) => {
     event.preventDefault();
 
-    createTransaction({
+    await createTransaction({
       title,
       category,
       amount,
       type,
     });
+
+    setTitle('');
+    setAmount(0);
+    setCategory('');
+    setType('deposit');
+
+    onRequestClose();
   };
 
   return (

@@ -18,7 +18,7 @@ interface TrasactionsProviderProps {
 
 interface TransactionContextData {
   transactions: TransactionProps[];
-  createTransaction: (transaction: TransactionInput) => void;
+  createTransaction: (transaction: TransactionInput) => Promise<void>;
 }
 
 const TransactionContext = createContext<TransactionContextData>(
@@ -36,9 +36,16 @@ export const TransactionsProvider = ({
       .then(response => setTransactions(response.data.transactions));
   }, []);
 
-  function createTransaction(transaction: TransactionInput) {
-    api.post('transactions', transaction);
-  }
+  const createTransaction = async (transactionInput: TransactionInput) => {
+    const response = await api.post('transactions', {
+      ...transactionInput,
+      createdAt: new Date(),
+    });
+
+    const { transaction } = response.data;
+
+    setTransactions([...transactions, transaction]); // conceito de imutabilidade
+  };
 
   return (
     <TransactionContext.Provider value={{ transactions, createTransaction }}>
