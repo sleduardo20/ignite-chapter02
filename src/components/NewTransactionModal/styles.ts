@@ -54,10 +54,10 @@ export const TrasactionTypeContainer = styled.div`
   gap: 0.5rem;
 `;
 
-type RadioBoxProps = {
+interface RadioBoxProps {
   isActive: boolean;
   activeColor: 'green' | 'red';
-};
+}
 
 const colorModifiers = {
   green: '#33cc95',

@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import closeImage from '../../assets/close.svg';
 import incomeImage from '../../assets/income.svg';
 import outcomeImage from '../../assets/outcome.svg';
+import { useTrasactions } from '../../hooks';
 import { api } from '../../services/api';
 
 import * as S from './styles';
@@ -17,22 +18,22 @@ export const NewTransactionModal = ({
   isOpen,
   onRequestClose,
 }: NewTransactionModalProps) => {
+  const { createTransaction } = useTrasactions();
+
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
-  const [value, setValue] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [type, setType] = useState('deposit');
 
   const handleCreateNewTransaction = (event: FormEvent) => {
     event.preventDefault();
 
-    const data = {
+    createTransaction({
       title,
       category,
-      value,
+      amount,
       type,
-    };
-
-    api.post('transactions', data);
+    });
   };
 
   return (
@@ -62,8 +63,8 @@ export const NewTransactionModal = ({
         <input
           placeholder="Valor"
           type="number"
-          value={value}
-          onChange={event => setValue(Number(event.target.value))}
+          value={amount}
+          onChange={event => setAmount(Number(event.target.value))}
         />
 
         <S.TrasactionTypeContainer>
