@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import closeImage from '../../assets/close.svg';
 import incomeImage from '../../assets/income.svg';
 import outcomeImage from '../../assets/outcome.svg';
+import { api } from '../../services/api';
 
 import * as S from './styles';
 
@@ -23,6 +24,15 @@ export const NewTransactionModal = ({
 
   const handleCreateNewTransaction = (event: FormEvent) => {
     event.preventDefault();
+
+    const data = {
+      title,
+      category,
+      value,
+      type,
+    };
+
+    api.post('transactions', data);
   };
 
   return (
